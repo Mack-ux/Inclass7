@@ -46,6 +46,13 @@ class ImageWithFrameToggle extends StatefulWidget {
 
 class _ImageWithFrameToggleState extends State<ImageWithFrameToggle> {
   bool _isFrameVisible = false; // Track whether the frame is visible
+  bool _isVisible = true; 
+
+  void toggleVisibility() {
+    setState(() {
+      _isVisible = !_isVisible;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +64,25 @@ class _ImageWithFrameToggleState extends State<ImageWithFrameToggle> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Fading text widget
+            AnimatedOpacity(
+              opacity: _isVisible ? 1.0 : 0.0,
+              duration: Duration(seconds: 1),
+              child: Text(
+                'Hello, Flutter!',
+                style: TextStyle(fontSize: 24),
+              ),
+            ),
+            SizedBox(height: 20),
+            // Image widget with frame toggle
             Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16), // Rounded corners
                 child: Container(
                   decoration: BoxDecoration(
                     border: _isFrameVisible
-                        ? Border.all(color: Colors.blue, width: 4) // Blue border
+                        ? Border.all(
+                            color: Colors.blue, width: 4) // Blue border
                         : null,
                   ),
                   child: Image.asset(
@@ -88,13 +107,25 @@ class _ImageWithFrameToggleState extends State<ImageWithFrameToggle> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: widget.toggleTheme, // Toggle theme when pressed
-        child: Icon(
-          _isDarkMode() ? Icons.wb_sunny : Icons.nightlight_round,
-        ),
-        tooltip: 'Toggle Brightness',
-        backgroundColor: Colors.blue,
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          // Button to toggle visibility of the "Hello, Flutter!" text
+          FloatingActionButton(
+            onPressed: toggleVisibility,
+            child: Icon(Icons.play_arrow),
+            tooltip: 'Toggle Text Visibility',
+          ),
+          SizedBox(height: 16),
+          // Button to toggle theme (light/dark mode)
+          FloatingActionButton(
+            onPressed: widget.toggleTheme,
+            child: Icon(
+              _isDarkMode() ? Icons.wb_sunny : Icons.nightlight_round,
+            ),
+            tooltip: 'Toggle Brightness',
+          ),
+        ],
       ),
     );
   }
