@@ -32,7 +32,7 @@ child: AnimatedOpacity(
 opacity: _isVisible ? 1.0 : 0.0,
 duration: Duration(seconds: 1),
 child: Text(
-'Hello, Flutter!',
+'Hello, Flutter!. This is a test',
 style: TextStyle(fontSize: 24),
 ),
 ),
