@@ -46,7 +46,8 @@ class ImageWithFrameToggle extends StatefulWidget {
 
 class _ImageWithFrameToggleState extends State<ImageWithFrameToggle> {
   bool _isFrameVisible = false; // Track whether the frame is visible
-  bool _isVisible = true; 
+  bool _isVisible = true;
+  Color _textColor = Colors.black; // Default text color
 
   void toggleVisibility() {
     setState(() {
@@ -64,13 +65,13 @@ class _ImageWithFrameToggleState extends State<ImageWithFrameToggle> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Fading text widget
+            // Fading text widget with customizable text color
             AnimatedOpacity(
               opacity: _isVisible ? 1.0 : 0.0,
               duration: Duration(seconds: 1),
               child: Text(
                 'Hello, Flutter!',
-                style: TextStyle(fontSize: 24),
+                style: TextStyle(fontSize: 24, color: _textColor),
               ),
             ),
             SizedBox(height: 20),
@@ -103,6 +104,39 @@ class _ImageWithFrameToggleState extends State<ImageWithFrameToggle> {
                   _isFrameVisible = value;
                 });
               },
+            ),
+            SizedBox(height: 20),
+            DropdownButton<Color>(
+              value: _textColor,
+              onChanged: (Color? newColor) {
+                setState(() {
+                  if (newColor != null) {
+                    _textColor = newColor;
+                  }
+                });
+              },
+              items: [
+                DropdownMenuItem(
+                  value: Colors.black,
+                  child: Text('Black', style: TextStyle(color: Colors.black)),
+                ),
+                DropdownMenuItem(
+                  value: Colors.white,
+                  child: Text('White', style: TextStyle(color: Colors.white)),
+                ),
+                DropdownMenuItem(
+                  value: Colors.red,
+                  child: Text('Red', style: TextStyle(color: Colors.red)),
+                ),
+                DropdownMenuItem(
+                  value: Colors.green,
+                  child: Text('Green', style: TextStyle(color: Colors.green)),
+                ),
+                DropdownMenuItem(
+                  value: Colors.blue,
+                  child: Text('Blue', style: TextStyle(color: Colors.blue)),
+                ),
+              ],
             ),
           ],
         ),
