@@ -40,7 +40,7 @@ class _ImageWithFrameToggleState extends State<ImageWithFrameToggle> {
                       : null,
                 ),
                 child: Image.asset(
-                  'assets/image.png', // Replace with your image path
+                  'assets/image.png', 
                   width: 200, // You can adjust the size
                   height: 200,
                   fit: BoxFit.cover,
