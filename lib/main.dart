@@ -30,7 +30,7 @@ title: Text('Fading Text Animation'),
 body: Center(
 child: AnimatedOpacity(
 opacity: _isVisible ? 1.0 : 0.0,
-duration: Duration(seconds: 1),
+duration: Duration(seconds: 4),
 child: Text(
 'Hello, Flutter!. This is a test',
 style: TextStyle(fontSize: 24),
